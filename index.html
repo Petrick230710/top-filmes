@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PETRICKflix - A melhor plataforma de streaming com os melhores filmes e séries">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <title>PETRICKflix - Assista aos melhores filmes e séries</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            color: #fff;
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23121212"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23222" stroke-width="1"/></svg>');
+            background-size: cover;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 20%, #000 90%),
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%23333' fill-opacity='0.2'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: #e50914;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e50914;
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            padding: 5px 10px;
+        }
+
+        .search i {
+            margin-right: 8px;
+            color: #fff;
+        }
+
+        .search input {
+            background: transparent;
+            border: none;
+            color: #fff;
+            outline: none;
+            width: 180px;
+        }
+
+        .search input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Seção de Destaque */
+        .destaque {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.2) 100%), 
+                        url('https://m.media-amazon.com/images/M/MV5BMGFhOGFkYjItMzQyOS00Y2ViLThhNWYtZTliYmU1NGVkY2E3XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg') no-repeat center center/cover;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .destaque-info {
+            max-width: 600px;
+        }
+
+        .destaque h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .meta-info {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .age-rating {
+            border: 1px solid #ccc;
+            padding: 0 5px;
+            border-radius: 3px;
+        }
+
+        .rating {
+            color: #f5c518;                        <h3>The Last of Us</h3>
+309
+                        <p>2023 · 1 temporada · <i class="fas fa-star"></i> 8.8</p>
+310
+                    </div>
+311
+                </div>
+312
+                <div class="serie">
+313
+                    <img src="https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_FMjpg_UX1000_.jpg" alt="Stranger Things">
+314
+                    <div class="serie-info">
+315
+                        <h3>Stranger Things</h3>
+316
+                        <p>2016 · 4 temporadas · <i class="fas fa-star"></i> 8.7</p>
+317
+                    </div>
+318
+                </div>
+319
+                <div class="serie">
+320
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2NlNGYwYTUtMTQ3MS00YjFjLTk1MzEtZDM0NTZlYzdlMmU5XkEyXkFqcGdeQXVyMjYwNDA2MDE@._V1_FMjpg_UX1000_.jpg" alt="The Witcher">
+321
+                    <div class="serie-info">
+322
+                        <h3>The Witcher</h3>
+323
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.2</p>
+324
+                    </div>
+325
+                </div>
+326
+                <div class="serie">
+327
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2IzYzBiOTQtNGZmMi00NDI5LTgxMzMtN2EzZjA                        <h3>The Last of Us</h3>
+309
+                        <p>2023 · 1 temporada · <i class="fas fa-star"></i> 8.8</p>
+310
+                    </div>
+311
+                </div>
+312
+                <div class="serie">
+313
+                    <img src="https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_FMjpg_UX1000_.jpg" alt="Stranger Things">
+314
+                    <div class="serie-info">
+315
+                        <h3>Stranger Things</h3>
+316
+                        <p>2016 · 4 temporadas · <i class="fas fa-star"></i> 8.7</p>
+317
+                    </div>
+318
+                </div>
+319
+                <div class="serie">
+320
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2NlNGYwYTUtMTQ3MS00YjFjLTk1MzEtZDM0NTZlYzdlMmU5XkEyXkFqcGdeQXVyMjYwNDA2MDE@._V1_FMjpg_UX1000_.jpg" alt="The Witcher">
+321
+                    <div class="serie-info">
+322
+                        <h3>The Witcher</h3>
+323
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.2</p>
+324
+                    </div>
+325
+                </div>
+326
+                <div class="serie">
+327
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2IzYzBiOTQtNGZmMi00NDI5LTgxMzMtN2EzZjA1NjhlOGMxXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" alt="The Mandalorian">
+328
+                    <div class="serie-info">
+329
+                        <h3>The Mandalorian</h3>
+330
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.7</p>
+331
+                    </div>
+332
+                </div>
+333
+                <div class="serie">
+334
+                    <img src="https://m.media-amazon.com/images/M/MV5BODkzMjQyYTctMmFhYi00Y2Q5LWI2ZGMtNTI5Y2VkOTQzZGYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Loki">
+335
+                    <div class="serie-info">
+336
+                        <h3>Loki</h3>
+337
+                        <p>2021 · 2 temporadas · <i class="fas fa-star"></i> 8.2</p>
+338
+                    </div>
+339
+                </div>
+340
+            </div>
+341
+        </div>
+342
+    </section>
+343
+​
+344
+    <footer>
+345
+        <div class="container">
+346
+            <div class="footer-links">
+347
+                <ul>
+348
+                    <li><a href="#">Termos de uso</a></li>
+349
+                    <li><a href="#">Política de privacidade</a></li>
+350
+                    <li><a href="#">Contato</a></li>
+351
+                    <li><a href="#">Ajuda</a></li>
+352
+                </ul>
+353
+            </div>
+354
+            <div class="social-media">
+355
+                <a href="#"><i class="fab fa-facebook"></i></a>
+356
+                <a href="#"><i class="fab fa-twitter"></i></a>
+357
+                <a href="#"><i class="fab fa-instagram"></i></a>
+358
+                <a href="#"><i class="fab fa-youtube"></i></a>
+359
+            </div>
+360
+            <p class="copyright">© 2024 Guiminamflix. Todos os direitos reservados.</p>
+361
+        </div>
+362
+    </footer>
+363
+</body>
+364
+​
+365
+</html>1NjhlOGMxXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" alt="The Mandalorian">
+328
+                    <div class="serie-info">
+329
+                        <h3>The Mandalorian</h3>
+330
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.7</p>
+331
+                    </div>
+332
+                </div>
+333
+                <div class="serie">
+334
+                    <img src="https://m.media-amazon.com/images/M/MV5BODkzMjQyYTctMmFhYi00Y2Q5LWI2ZGMtNTI5Y2VkOTQzZGYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Loki">
+335
+                    <div class="serie-info">
+336
+                        <h3>Loki</h3>
+337
+                        <p>2021 · 2 temporadas · <i class="fas fa-star"></i> 8.2</p>
+338
+                    </div>
+339
+                </div>
+340
+            </div>
+341
+        </div>
+342
+    </section>
+343
+​
+344
+    <footer>
+345
+        <div class="container">
+346
+            <div class="footer-links">
+347
+                <ul>
+348
+                    <li><a href="#">Termos de uso</a></li>
+349
+                    <li><a href="#">Política de privacidade</a></li>
+350
+                    <li><a href="#">Contato</a></li>
+351
+                    <li><a href="#">Ajuda</a></li>
+352
+                </ul>
+353
+            </div>
+354
+            <div class="social-media">
+355
+                <a href="#"><i class="fab fa-facebook"></i></a>
+356
+                <a href="#"><i class="fab fa-twitter"></i></a>
+357
+                <a href="#"><i class="fab fa-instagram"></i></a>
+358
+                <a href="#"><i class="fab fa-youtube"></i></a>
+359
+            </div>
+360
+            <p class="copyright">© 2024 Guiminamflix. Todos os direitos reservados.</p>
+361
+        </div>
+362
+    </footer>
+363
+</body>
+364
+​
+365
+</html>
+        }
+
+        .sinopse {
+            margin-bottom: 20px;
+            line-height: 1.5;
+            font-size: 1.1rem;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-play, .btn-info {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .btn-play {
+            background: #fff;
+            color: #000;
+        }
+
+        .btn-play:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .btn-info {
+            background: rgba(109, 109, 110, 0.7);
+            color: #fff;
+        }
+
+        .btn-info:hover {
+            background: rgba(109, 109, 110, 0.5);
+        }
+
+        /* Seção Chamada */
+        .chamada {
+            padding: 50px 0;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .chamada .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .chamada-texto {
+            flex: 1;
+        }
+
+        .chamada-texto h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #e50914;
+        }
+
+        .tags {
+            display: flex;                        <h3>The Last of Us</h3>
+309
+                        <p>2023 · 1 temporada · <i class="fas fa-star"></i> 8.8</p>
+310
+                    </div>
+311
+                </div>
+312
+                <div class="serie">
+313
+                    <img src="https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_FMjpg_UX1000_.jpg" alt="Stranger Things">
+314
+                    <div class="serie-info">
+315
+                        <h3>Stranger Things</h3>
+316
+                        <p>2016 · 4 temporadas · <i class="fas fa-star"></i> 8.7</p>
+317
+                    </div>
+318
+                </div>
+319
+                <div class="serie">
+320
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2NlNGYwYTUtMTQ3MS00YjFjLTk1MzEtZDM0NTZlYzdlMmU5XkEyXkFqcGdeQXVyMjYwNDA2MDE@._V1_FMjpg_UX1000_.jpg" alt="The Witcher">
+321
+                    <div class="serie-info">
+322
+                        <h3>The Witcher</h3>
+323
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.2</p>
+324
+                    </div>
+325
+                </div>
+326
+                <div class="serie">
+327
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2IzYzBiOTQtNGZmMi00NDI5LTgxMzMtN2EzZjA1NjhlOGMxXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" alt="The Mandalorian">
+328
+                    <div class="serie-info">
+329
+                        <h3>The Mandalorian</h3>
+330
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.7</p>
+331
+                    </div>
+332
+                </div>
+333
+                <div class="serie">
+334
+                    <img src="https://m.media-amazon.com/images/M/MV5BODkzMjQyYTctMmFhYi00Y2Q5LWI2ZGMtNTI5Y2VkOTQzZGYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Loki">
+335
+                    <div class="serie-info">
+336
+                        <h3>Loki</h3>
+337
+                        <p>2021 · 2 temporadas · <i class="fas fa-star"></i> 8.2</p>
+338
+                    </div>
+339
+                </div>
+340
+            </div>
+341
+        </div>
+342
+    </section>
+343
+​
+344
+    <footer>
+345
+        <div class="container">
+346
+            <div class="footer-links">
+347
+                <ul>
+348
+                    <li><a href="#">Termos de uso</a></li>
+349
+                    <li><a href="#">Política de privacidade</a></li>
+350
+                    <li><a href="#">Contato</a></li>
+351
+                    <li><a href="#">Ajuda</a></li>
+352
+                </ul>
+353
+            </div>
+354
+            <div class="social-media">
+355
+                <a href="#"><i class="fab fa-facebook"></i></a>
+356
+                <a href="#"><i class="fab fa-twitter"></i></a>
+357
+                <a href="#"><i class="fab fa-instagram"></i></a>
+358
+                <a href="#"><i class="fab fa-youtube"></i></a>
+359
+            </div>
+360
+            <p class="copyright">© 2024 Guiminamflix. Todos os direitos reservados.</p>
+361
+        </div>
+362
+    </footer>
+363
+</body>
+364
+​
+365
+</html>
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tags span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .video-container {
+            flex: 1;
+            position: relative;
+            padding-bottom: 30%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Categorias */
+        .categorias {
+            margin-bottom: 50px;
+        }
+
+        .categorias h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid #e50914;
+        }
+
+        .carrossel {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: #e50914 #333;
+        }
+
+        .carrossel::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carrossel::-webkit-scrollbar-track {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .carrossel::-webkit-scrollbar-thumb {
+            background: #e50914;
+            border-radius: 4px;
+        }
+
+        .filme, .serie {
+            min-width: 200px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .filme:hover, .serie:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .filme img, .serie img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .filme-info, .serie-info {
+            padding: 15px;
+        }
+
+        .filme-info h3, .serie-info h3 {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .filme-info p, .serie-info p {
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+
+        .footer-links ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #e50914;
+        }
+
+        .social-media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-media a {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #e50914;
+        }
+
+        .copyright {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .chamada .container {
+                flex-direction: column;
+            }
+            
+            .video-container {
+                width: 100%;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            }
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 10px;
+            }
+            
+            .destaque h2 {
+                font-size: 2rem;
+            }
+            
+            .chamada-texto h1 {
+                font-size: 1.8rem;
+            }
+            
+            .footer-links ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .filme, .serie {
+                min-width: 150px;
+            }
+            
+            .filme img, .serie img {
+                height: 225px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>GUIMINAMFLIX</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#">Séries</a></li>
+                    <li><a href="#">Filmes</a></li>
+                    <li><a href="#">Minha lista</a></li>
+                </ul>
+            </nav>
+            <div class="search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar filmes e séries...">
+            </div>
+        </div>
+    </header>
+
+    <section class="destaque">
+        <div class="container">
+            <div class="destaque-info">
+                <h2>Duna: Parte Dois</h2>
+                <p class="meta-info">
+                    <span>2024</span>
+                    <span class="age-rating">14+</span>
+                    <span>2h 46min</span>
+                    <span class="rating"><i class="fas fa-star"></i> 8.9</span>
+                </p>
+                <p class="sinopse">Paul Atreides une-se a Chani e aos Fremen enquanto busca vingança contra os conspiradores que destruíram sua família. Diante de uma escolha entre o amor de sua vida e o destino do universo, ele deve evitar um futuro terrível que só ele pode prever.</p>
+                <div class="buttons">
+                    <button class="btn-play"><i class="fas fa-play"></i> Assistir</button>
+                    <button class="btn-info"><i class="fas fa-info-circle"></i> Mais informações</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chamada">
+        <div class="container">
+            <div class="chamada-texto">
+                <h1>GUARDIÕES DA GALÁXIA VOL. 3</h1>
+                <div class="tags">
+                    <span>#marvel</span>
+                    <span>#ação</span>
+                    <span>#aventura</span>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/d1yNcNgNz3E?si=2j5bY5J5z5Z5Z5Z5" 
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="categorias">
+        <div class="container">
+            <h2>Filmes em destaque</h2>
+            <div class="carrossel">
+                <div class="filme">
+                    <img src="https://m.media-amazon.com/images/M/MV5BMDgxOTdjMzYtZGQxMS00ZTAzLWI4Y2UtMTQzN2VlYjYyZWRiXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Oppenheimer">
+                    <div class="filme-info">
+                        <h3>Oppenheimer</h3>
+                        <p>2023 · 3h · <i class="fas fa-star"></i> 8.5</p>
+                    </div>
+                </div>
+                <div class="filme">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZWMyYzFjYTYtNTRjYi00OGExLWE2YzgtOGRmYjAxZTU3NzBiXkEyXkFqcGdeQXVyMzQ0MzA0NTM@._V1_FMjpg_UX1000_.jpg" alt="Homem-Aranha: Através do Aranhaverso">
+                    <div class="filme-info">
+                        <h3>Homem-Aranha: Através do Aranhaverso</h3>
+                        <p>2023 · 2h 20min · <i class="fas fa-star"></i> 8.7</p>
+                    </div>
+                </div>
+                <div class="filme">
+                    <img src="https://m.media-amazon.com/images/M/MV5BOTY4YjI2N2MtYmFlMC00ZjcyLTg3YjEtMDQyM2ZjYzQ5YWFkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Barbie">
+                    <div class="filme-info">
+                        <h3>Barbie</h3>
+                        <p>2023 · 1h 54min · <i class="fas fa-star"></i> 7.0</p>
+                    </div>
+                </div>
+                <div class="filme">
+                    <img src="https://m.media-amazon.com/images/M/MV5BYWY4N2QwYTQtZDA5NC00ZTI0LWE0ZTAtZWVjOTM3YzFkNmY0XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_FMjpg_UX1000_.jpg" alt="John Wick 4">
+                    <div class="filme-info">
+                        <h3>John Wick 4</h3>
+                        <p>2023 · 2h 49min · <i class="fas fa-star"></i> 7.8</p>
+                    </div>
+                </div>
+                <div class="filme">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZTU5ZThjNzAtNjc4NC00OTViLWIxYTYtODFmMTk5Y2NjZjZiXkEyXkFqcGdeQXVyNjc5NjEzNA@@._V1_FMjpg_UX1000_.jpg" alt="Missão: Impossível 7">
+                    <div class="filme-info">
+                        <h3>Missão: Impossível 7</h3>
+                        <p>2023 · 2h 43min · <i class="fas fa-star"></i> 7.8</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categorias">
+        <div class="container">
+            <h2>Séries populares</h2>
+            <div class="carrossel">
+                <div class="serie">
+                    <img src="https://m.media-amazon.com/images/M/MV5BODZlYjQ4NzYtZTg1MC00NGY4LTg4NjQtNGE3ZjRkMjk3YjMyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="The Last of Us">
+                    <div class="serie-info">
+                        <h3>The Last of Us</h3>
+                        <p>2023 · 1 temporada · <i class="fas fa-star"></i> 8.8</p>
+                    </div>
+                </div>
+                <div class="serie">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZWYzOGEwNTgtNWU3NS00ZTQ0LWJkODUtMmVhMjIwMjA1ZmQwXkEyXkFqcGdeQXVyMjkwOTAyMDU@._V1_FMjpg_UX1000_.jpg" alt="Stranger Things">
+                    <div class="serie-info">
+                        <h3>Stranger Things</h3>
+                        <p>2016 · 4 temporadas · <i class="fas fa-star"></i> 8.7</p>
+                    </div>
+                </div>
+                <div class="serie">
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2NlNGYwYTUtMTQ3MS00YjFjLTk1MzEtZDM0NTZlYzdlMmU5XkEyXkFqcGdeQXVyMjYwNDA2MDE@._V1_FMjpg_UX1000_.jpg" alt="The Witcher">
+                    <div class="serie-info">
+                        <h3>The Witcher</h3>
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.2</p>
+                    </div>
+                </div>
+                <div class="serie">
+                    <img src="https://m.media-amazon.com/images/M/MV5BN2IzYzBiOTQtNGZmMi00NDI5LTgxMzMtN2EzZjA1NjhlOGMxXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" alt="The Mandalorian">
+                    <div class="serie-info">
+                        <h3>The Mandalorian</h3>
+                        <p>2019 · 3 temporadas · <i class="fas fa-star"></i> 8.7</p>
+                    </div>
+                </div>
+                <div class="serie">
+                    <img src="https://m.media-amazon.com/images/M/MV5BODkzMjQyYTctMmFhYi00Y2Q5LWI2ZGMtNTI5Y2VkOTQzZGYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UX1000_.jpg" alt="Loki">
+                    <div class="serie-info">
+                        <h3>Loki</h3>
+                        <p>2021 · 2 temporadas · <i class="fas fa-star"></i> 8.2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <ul>
+                    <li><a href="#">Termos de uso</a></li>
+                    <li><a href="#">Política de privacidade</a></li>
+                    <li><a href="#">Contato</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </div>
+            <div class="social-media">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">© 2024 PETRICKflix. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
